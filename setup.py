@@ -24,6 +24,11 @@ setup_info = dict(
     packages=find_packages(exclude=('test',)),
 
     zip_safe=True,
+    install_requires= [
+        'nltk',
+        'requests',
+        'spacy'
+    ]
 )
 
 setup(**setup_info)
