@@ -390,6 +390,32 @@ class ZipDataset(Dataset):
                 zfile.extractall(root)
         return os.path.join(path, '')
 
+class TarDataset(Dataset):
+    """Defines a Dataset loaded from a downloadable zip archive.
+
+    Attributes:
+        url: URL where the zip archive can be downloaded.
+        filename: Filename of the downloaded zip archive.
+        dirname: Name of the top-level directory within the zip archive that
+            contains the data files.
+    """
+
+    @classmethod
+    def download_or_unzip(cls, root):
+        import tarfile
+        path = os.path.join(root, cls.dirname)
+        if not os.path.isdir(path):
+            zpath = os.path.join(root, cls.filename)
+            if not os.path.isfile(zpath):
+                print('Downloading dataset from: ', cls.url)
+                urllib.request.urlretrieve(cls.url, zpath)
+            with tarfile.open(zpath, 'r') as zfile:
+                print('Extracting into : ', root)
+                zfile.extractall(root)
+                zfile.close()
+        return os.path.join(path, '')
+
+
 
 class TabularDataset(Dataset):
     """Defines a Dataset of columns stored in CSV, TSV, or JSON format."""

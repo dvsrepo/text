@@ -1,5 +1,6 @@
 build/
 dist/
+data/
 torchtext.egg-info/
 *.txt
 *.zip
@@ -7,3 +8,6 @@ torchtext.egg-info/
 */**/*.pyc
 */**/*~
 *~
+.idea
+**/__MACOSX
+test/snli_1.0
